@@ -7,62 +7,13 @@ type ChatMessage = {
   text: string;
 };
 
-type FaqItem = {
-  question: string;
-  answer: string;
-};
-
-const FAQS: FaqItem[] = [
-  {
-    question:
-      "I HAVE A NEW CAR; DO I NEED TO TAKE IT TO A DEALERSHIP FOR MAINTENANCE IN ORDER TO KEEP MY WARRANTY VALID?",
-    answer:
-      "No. Regular maintenance does not have to be performed at the dealership to keep your warranty valid, as long as the service follows the manufacturer schedule and is properly documented.",
-  },
-  {
-    question:
-      "WHAT DO I HAVE TO DO TO KEEP MY CAR OR TRUCK'S WARRANTY IN EFFECT?",
-    answer:
-      "Follow the maintenance schedule in your owner's manual and keep records of the services performed, including dates, mileage, and invoices.",
-  },
-  {
-    question:
-      "MY CAR IS A LEASED VEHICLE. AM I RESPONSIBLE FOR MAINTENANCE?",
-    answer:
-      "Yes. Lease agreements still require the vehicle to be maintained according to the manufacturer recommendations during the lease term.",
-  },
-  {
-    question:
-      "WHAT PARTS SHOULD BE REPLACED AND AT WHAT INTERVALS SHOULD THESE SERVICES BE PERFORMED?",
-    answer:
-      "That depends on the year, make, and model of the vehicle. The correct intervals are listed in your owner's manual, and severe driving conditions may require shorter intervals.",
-  },
-  {
-    question:
-      "WHAT IF MY NEW CAR NEEDS REPAIRS OTHER THAN REGULARLY SCHEDULED MAINTENANCE SUCH AS A BRAKE JOB OR OTHER REPAIRS? DO I HAVE TO RETURN TO THE DEALER FOR THESE REPAIRS? WHAT IF THESE REPAIRS ARE COVERED UNDER MY WARRANTY?",
-    answer:
-      "You can usually choose an independent repair shop for non-warranty repairs. If a repair is covered by the manufacturer's warranty, the dealer may still need to handle that specific warranty claim.",
-  },
-  {
-    question: "DOES BRAKE FLUID REALLY NEED TO BE CHANGED?",
-    answer:
-      "Yes. Brake fluid absorbs moisture over time, which can reduce braking performance and contribute to corrosion inside the brake system.",
-  },
-  {
-    question: "HOW OFTEN SHOULD ANTIFREEZE BE REPLACED?",
-    answer:
-      "Coolant replacement depends on the vehicle and coolant type. Many vehicles have long-life coolant, but the exact interval should be checked in the owner's manual.",
-  },
-];
-
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { sender: "bot", text: "Hi, I'm Lex Auto Assistant. Ask me something." },
+    { sender: "bot", text: "Hi, I'm Bakery Assistant. Ask me something." },
   ]);
-  const [openFaqIndex, setOpenFaqIndex] = useState<number>(1);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -98,7 +49,7 @@ export default function Page() {
     setInput("");
 
     try {
-      const res = await fetch("https://YOUR-LEX-AUTO-BACKEND.vercel.app/api/chat", {
+      const res = await fetch("https://bakery-help.vercel.app/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -130,400 +81,409 @@ export default function Page() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#ececec",
+        backgroundColor: "#f6f4ef",
+        backgroundImage: `
+          radial-gradient(circle at 10% 12%, rgba(0,0,0,0.07) 0 1px, transparent 1.8px),
+          radial-gradient(circle at 28% 34%, rgba(0,0,0,0.05) 0 1.4px, transparent 2px),
+          radial-gradient(circle at 67% 18%, rgba(0,0,0,0.06) 0 1.2px, transparent 2px),
+          radial-gradient(circle at 83% 27%, rgba(0,0,0,0.05) 0 1.5px, transparent 2px),
+          radial-gradient(circle at 16% 72%, rgba(0,0,0,0.05) 0 1.2px, transparent 2px),
+          radial-gradient(circle at 58% 76%, rgba(0,0,0,0.06) 0 1.4px, transparent 2px),
+          radial-gradient(circle at 88% 82%, rgba(0,0,0,0.05) 0 1.2px, transparent 2px)
+        `,
+        backgroundSize:
+          "260px 260px, 340px 340px, 320px 320px, 380px 380px, 300px 300px, 360px 360px, 320px 320px",
         color: "#111",
         fontFamily:
-          'Arial, Helvetica, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
       }}
     >
       <div
         style={{
-          background: "#111",
-          color: "#fff",
+          maxWidth: "1720px",
+          margin: "0 auto",
+          padding: "24px 34px 140px",
         }}
       >
-        <div
+        <header
           style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "0 32px",
-            minHeight: "64px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "20px",
-              letterSpacing: "0.2px",
-            }}
-          >
-            Monday-Saturday{" "}
-            <span style={{ color: "#f0d10b" }}>10:00AM - 6:30PM</span>
-          </div>
-
-          <button
-            style={{
-              background: "#f0d10b",
-              color: "#111",
-              border: "none",
-              padding: "18px 34px",
-              fontSize: "22px",
-              fontWeight: 700,
-              cursor: "pointer",
-              borderBottomLeftRadius: "34px",
-            }}
-          >
-            ➜ APPOINTMENT
-          </button>
-        </div>
-      </div>
-
-      <header
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(8,8,8,1) 0%, rgba(26,26,26,1) 60%, rgba(54,54,54,1) 100%)",
-          color: "#fff",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "28px 32px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             gap: "24px",
-            flexWrap: "wrap",
+            paddingBottom: "26px",
+            borderBottom: "1px solid rgba(0,0,0,0.06)",
           }}
         >
-          <div>
-            <div
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "34px",
+              fontSize: "18px",
+              color: "#1a1a1a",
+              flexWrap: "wrap",
+            }}
+          >
+            <span>Valentines Pre Order</span>
+            <span
               style={{
-                fontSize: "58px",
-                fontWeight: 900,
-                lineHeight: 1,
-                color: "#f0d10b",
-                textTransform: "uppercase",
-                letterSpacing: "-1px",
+                textDecoration: "underline",
+                textUnderlineOffset: "9px",
               }}
             >
-              Lex Auto
+              Menu
+            </span>
+          </div>
+
+          <div
+            style={{
+              fontSize: "24px",
+              fontWeight: 500,
+              letterSpacing: "0.2px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Butter Lane Bake Shop
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "18px",
+              fontSize: "18px",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <span>Login</span>
+            <span>◎</span>
+            <span>✉</span>
+            <span>🛒 0</span>
+          </div>
+        </header>
+
+        <main
+          style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(520px, 1fr) minmax(520px, 1fr)",
+            gap: "64px",
+            alignItems: "start",
+            paddingTop: "64px",
+          }}
+        >
+          <section>
+            <h1
+              style={{
+                fontSize: "72px",
+                fontWeight: 700,
+                lineHeight: 1.02,
+                margin: "0 0 30px 0",
+                letterSpacing: "-1.8px",
+              }}
+            >
+              Contact Us
+            </h1>
+
+            <p
+              style={{
+                fontSize: "24px",
+                lineHeight: 1.7,
+                maxWidth: "760px",
+                margin: "0 0 44px 0",
+              }}
+            >
+              Thank you for being interested in Butter Lane Bake Shop! We
+              appreciate your thoughts and messages. To reach us, please see the
+              following options for contacting our bakery:
+            </p>
+
+            <div
+              style={{
+                maxWidth: "770px",
+                fontSize: "22px",
+                lineHeight: 1.75,
+              }}
+            >
+              <p style={{ margin: "0 0 18px 0" }}>
+                <strong>Call us</strong> at (604)922-4472 during our business
+                hours for immediate assistance or any inquiries. Our friendly
+                staff is here to help with any questions or orders.
+              </p>
+
+              <p style={{ margin: "0 0 18px 0" }}>
+                <strong>Email us</strong> at katie@butterlanebakeshop.com for
+                questions, suggestions, or general inquiries. Our team will
+                respond within 48 hours.
+              </p>
+
+              <p style={{ margin: "0 0 18px 0" }}>
+                <strong>Connect with us</strong> on Instagram by following
+                @ButterLaneBakeShop. Send us a direct message or leave a comment
+                on our posts. We love interacting with our customers and sharing
+                our latest creations!
+              </p>
+
+              <p style={{ margin: "0 0 26px 0" }}>
+                <strong>Visit our bakery</strong> at 101-175 W 3rd St North
+                Vancouver,
+              </p>
+
+              <div
+                style={{
+                  marginTop: "10px",
+                  paddingLeft: "2px",
+                  fontSize: "22px",
+                  lineHeight: 1.9,
+                }}
+              >
+                <div>
+                  <strong>Sunday &amp; Monday</strong> CLOSED
+                </div>
+                <div>
+                  <strong>Tuesday - Friday</strong> 8:30-3:30
+                </div>
+                <div>
+                  <strong>Saturday</strong> 10-3
+                </div>
+              </div>
+
+              <p style={{ margin: "28px 0 10px 0" }}>
+                Or in the Lonsdale Quay Market,
+              </p>
+
+              <div
+                style={{
+                  fontSize: "22px",
+                  lineHeight: 1.8,
+                }}
+              >
+                <strong>7 days a week</strong> 10am-5pm.
+              </div>
             </div>
+          </section>
+
+          <section>
             <div
               style={{
                 fontSize: "24px",
-                letterSpacing: "6px",
-                textTransform: "uppercase",
-                marginTop: "4px",
+                marginBottom: "18px",
+                fontWeight: 500,
               }}
             >
-              Solutions
+              Name
             </div>
-          </div>
 
-          <div style={{ textAlign: "right" }}>
             <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "18px",
+                marginBottom: "30px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  First Name <span style={{ color: "#666" }}>(required)</span>
+                </div>
+                <div
+                  style={{
+                    height: "68px",
+                    border: "1px solid #bdbdbd",
+                    background: "rgba(255,255,255,0.24)",
+                  }}
+                />
+              </div>
+
+              <div>
+                <div
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Last Name <span style={{ color: "#666" }}>(required)</span>
+                </div>
+                <div
+                  style={{
+                    height: "68px",
+                    border: "1px solid #bdbdbd",
+                    background: "rgba(255,255,255,0.24)",
+                  }}
+                />
+              </div>
+            </div>
+
+            <div style={{ marginBottom: "30px" }}>
+              <div
+                style={{
+                  fontSize: "20px",
+                  marginBottom: "10px",
+                }}
+              >
+                Email <span style={{ color: "#666" }}>(required)</span>
+              </div>
+              <div
+                style={{
+                  height: "68px",
+                  border: "1px solid #bdbdbd",
+                  background: "rgba(255,255,255,0.24)",
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "30px" }}>
+              <div
+                style={{
+                  fontSize: "20px",
+                  marginBottom: "10px",
+                }}
+              >
+                Message <span style={{ color: "#666" }}>(required)</span>
+              </div>
+              <div
+                style={{
+                  height: "168px",
+                  border: "1px solid #bdbdbd",
+                  background: "rgba(255,255,255,0.24)",
+                }}
+              />
+            </div>
+
+            <button
+              style={{
+                width: "116px",
+                height: "64px",
+                borderRadius: "999px",
+                border: "none",
+                background: "#000",
+                color: "#fff",
+                fontSize: "20px",
+                fontWeight: 700,
+                cursor: "pointer",
+              }}
+            >
+              Send
+            </button>
+          </section>
+        </main>
+
+        <section
+          style={{
+            marginTop: "120px",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "64px",
+            alignItems: "start",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "740px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "38px",
+                margin: "0 0 20px 0",
+                letterSpacing: "-0.6px",
+              }}
+            >
+              Visit &amp; Pickup
+            </h2>
+
+            <p
               style={{
                 fontSize: "22px",
-                textTransform: "uppercase",
-                opacity: 0.95,
+                lineHeight: 1.75,
+                margin: 0,
               }}
             >
-              Schedule your appointment today
-            </div>
-            <div
+              Stop by the bakery for fresh pastries, cakes, and seasonal items.
+              Our North Vancouver location and Lonsdale Quay Market location
+              both offer a welcoming in-person experience for pickup and casual
+              visits.
+            </p>
+          </div>
+
+          <div
+            style={{
+              maxWidth: "740px",
+            }}
+          >
+            <h2
               style={{
-                fontSize: "56px",
-                fontWeight: 300,
-                lineHeight: 1.05,
-                marginTop: "4px",
+                fontSize: "38px",
+                margin: "0 0 20px 0",
+                letterSpacing: "-0.6px",
               }}
             >
-              604-303-9020
-            </div>
-          </div>
-        </div>
-      </header>
+              Orders &amp; Questions
+            </h2>
 
-      <nav
-        style={{
-          background: "#efefef",
-          borderBottom: "1px solid #ddd",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "0 32px",
-            display: "flex",
-            alignItems: "stretch",
-            overflowX: "auto",
-          }}
-        >
-          {[
-            "Home",
-            "About Us",
-            "Services",
-            "Pricing & Coupons",
-            "Blog",
-            "Gallery",
-            "Testimonials",
-            "FAQ",
-            "Shop",
-            "Contacts",
-          ].map((item) => (
-            <div
-              key={item}
+            <p
               style={{
-                padding: "24px 22px",
-                fontSize: "18px",
-                whiteSpace: "nowrap",
-                background: item === "FAQ" ? "#f0d10b" : "transparent",
-                fontWeight: item === "FAQ" ? 700 : 500,
+                fontSize: "22px",
+                lineHeight: 1.75,
+                margin: 0,
               }}
             >
-              {item}
-            </div>
-          ))}
-
-          <div
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "center",
-              padding: "0 10px 0 20px",
-              fontSize: "30px",
-              color: "#444",
-            }}
-          >
-            ⌕
+              For custom cake requests, larger dessert orders, or event-related
+              questions, reaching out early helps the bakery team prepare the
+              best response and availability for your request.
+            </p>
           </div>
-        </div>
-      </nav>
+        </section>
 
-      <section
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(32,32,32,1) 0%, rgba(26,26,26,1) 100%)",
-          color: "#fff",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
+        <section
           style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "70px 32px 80px",
+            marginTop: "120px",
+            maxWidth: "980px",
           }}
         >
-          <div
+          <h2
             style={{
-              fontSize: "18px",
-              marginBottom: "20px",
-              opacity: 0.92,
+              fontSize: "38px",
+              margin: "0 0 20px 0",
+              letterSpacing: "-0.6px",
             }}
           >
-            Home / Frequently Asked Question
-          </div>
-
-          <h1
-            style={{
-              margin: 0,
-              fontSize: "78px",
-              fontWeight: 300,
-              lineHeight: 1.02,
-              letterSpacing: "-2px",
-            }}
-          >
-            Frequently{" "}
-            <span style={{ color: "#f0d10b", fontWeight: 500 }}>Asked Question</span>
-          </h1>
-
-          <p
-            style={{
-              fontSize: "24px",
-              lineHeight: 1.75,
-              maxWidth: "1220px",
-              margin: "28px 0 0 0",
-              color: "rgba(255,255,255,0.82)",
-            }}
-          >
-            At Lex Auto Solutions we want to make servicing as simple, and hassle
-            free as possible. Below are some frequently asked questions. If your
-            question isn't listed below, please do not hesitate to contact our
-            Customer Service team on 604-303-9020.
-          </p>
-        </div>
-      </section>
-
-      <main
-        style={{
-          maxWidth: "1500px",
-          margin: "0 auto",
-          padding: "40px 32px 100px",
-        }}
-      >
-        {FAQS.map((faq, index) => {
-          const isOpenFaq = openFaqIndex === index;
-
-          return (
-            <div
-              key={faq.question}
-              style={{
-                borderTop: "2px solid #dfc126",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gap: "28px",
-                  alignItems: "flex-start",
-                  padding: "34px 0",
-                }}
-              >
-                <button
-                  onClick={() =>
-                    setOpenFaqIndex(isOpenFaq ? -1 : index)
-                  }
-                  style={{
-                    width: "110px",
-                    height: "110px",
-                    border: "none",
-                    background: "#f0d10b",
-                    color: "#111",
-                    fontSize: "58px",
-                    lineHeight: 1,
-                    cursor: "pointer",
-                    flexShrink: 0,
-                  }}
-                  aria-label={isOpenFaq ? "Collapse FAQ" : "Expand FAQ"}
-                >
-                  {isOpenFaq ? "−" : "+"}
-                </button>
-
-                <div style={{ flex: 1, paddingTop: "4px" }}>
-                  <div
-                    style={{
-                      fontSize: "29px",
-                      lineHeight: 1.35,
-                      fontWeight: 500,
-                      textTransform: "uppercase",
-                      color: isOpenFaq ? "#d8b600" : "#111",
-                    }}
-                  >
-                    {faq.question}
-                  </div>
-
-                  {isOpenFaq && (
-                    <div
-                      style={{
-                        marginTop: "30px",
-                        fontSize: "24px",
-                        lineHeight: 1.8,
-                        color: "#222",
-                        maxWidth: "1280px",
-                      }}
-                    >
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </main>
-
-      <footer
-        style={{
-          background: "#222",
-          color: "#fff",
-          marginTop: "20px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1500px",
-            margin: "0 auto",
-            padding: "70px 32px 56px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "46px",
-              marginBottom: "34px",
-            }}
-          >
-            Call: <span style={{ color: "#f0d10b", fontWeight: 700 }}>604-303-9020</span>
-          </div>
+            Bakery Information
+          </h2>
 
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "22px",
-              fontSize: "28px",
-              lineHeight: 1.5,
+              fontSize: "22px",
+              lineHeight: 1.8,
             }}
           >
-            <div>📍 5-11220 Voyageur Way, Richmond BC V6X 3E1</div>
-            <div>
-              🕘 Monday-Saturday <span style={{ color: "#f0d10b" }}>10:00AM - 6:30PM</span>
-              <br />
-              Sunday Closed
-            </div>
-            <div>✉ sales@lexauto.org</div>
-          </div>
+            <p style={{ margin: "0 0 16px 0" }}>
+              Butter Lane Bake Shop is a local bakery experience focused on
+              approachable service, seasonal baked goods, and custom orders for
+              customers across North Vancouver.
+            </p>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "14px",
-              flexWrap: "wrap",
-              marginTop: "36px",
-            }}
-          >
-            {["f", "t", "g+", "▶", "◎", "t", "Be", "in"].map((icon) => (
-              <div
-                key={icon}
-                style={{
-                  width: "58px",
-                  height: "58px",
-                  borderRadius: "999px",
-                  background: "#f0d10b",
-                  color: "#111",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "22px",
-                  fontWeight: 700,
-                }}
-              >
-                {icon}
-              </div>
-            ))}
-          </div>
-        </div>
+            <p style={{ margin: "0 0 16px 0" }}>
+              This demo page is designed to simulate how a real client website
+              might look when your reusable chat widget is installed and active
+              on top of the page.
+            </p>
 
-        <div
-          style={{
-            background: "#000",
-            textAlign: "center",
-            padding: "22px 16px",
-            fontSize: "18px",
-            color: "rgba(255,255,255,0.9)",
-          }}
-        >
-          © 2021 Lex Auto Solutions, All Rights Reserved
-        </div>
-      </footer>
+            <p style={{ margin: 0 }}>
+              Scroll this page and keep the chat open to demonstrate that the
+              widget remains attached to the viewport just like a production
+              install would.
+            </p>
+          </div>
+        </section>
+
+        <div style={{ height: "900px" }} />
+      </div>
 
       {!isOpen && (
         <button
@@ -533,19 +493,20 @@ export default function Page() {
             position: "fixed",
             right: "24px",
             bottom: "24px",
-            width: "78px",
-            height: "78px",
+            width: "68px",
+            height: "68px",
             borderRadius: "999px",
             border: "none",
-            background: "#f0d10b",
-            color: "#111",
-            fontSize: "34px",
+            background: "#000",
+            color: "#fff",
+            fontSize: "30px",
             cursor: "pointer",
-            boxShadow: "0 14px 34px rgba(0,0,0,0.28)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.22)",
             zIndex: 9999,
+            transition: "transform 0.18s ease, box-shadow 0.18s ease",
           }}
         >
-          🚗
+          💬
         </button>
       )}
 
@@ -556,16 +517,16 @@ export default function Page() {
             right: "24px",
             bottom: "24px",
             transform: isVisible
-              ? "scale(0.98) translateY(0px)"
-              : "scale(0.92) translateY(18px)",
+              ? "scale(0.9) translateY(0px)"
+              : "scale(0.86) translateY(18px)",
             transformOrigin: "bottom right",
             opacity: isVisible ? 1 : 0,
-            width: "370px",
-            height: "560px",
+            width: "360px",
+            height: "540px",
             background: "#fff",
             border: "1px solid #d8d8d8",
             borderRadius: "24px",
-            boxShadow: "0 22px 54px rgba(0,0,0,0.22)",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.16)",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
@@ -577,12 +538,11 @@ export default function Page() {
           <div
             style={{
               padding: "18px 18px 14px 18px",
-              borderBottom: "1px solid #ececec",
+              borderBottom: "1px solid #e6e6e6",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#111",
-              color: "#fff",
+              background: "#fff",
             }}
           >
             <div>
@@ -593,12 +553,12 @@ export default function Page() {
                   lineHeight: 1.2,
                 }}
               >
-                Lex Auto Assistant
+                Bakery Assistant
               </div>
               <div
                 style={{
                   fontSize: "12px",
-                  color: "rgba(255,255,255,0.72)",
+                  color: "#777",
                   marginTop: "4px",
                 }}
               >
@@ -613,14 +573,15 @@ export default function Page() {
                 width: "42px",
                 height: "42px",
                 borderRadius: "999px",
-                border: "1px solid rgba(255,255,255,0.2)",
-                background: "#1b1b1b",
+                border: "1px solid #ddd",
+                background: "#fff",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: 0,
-                color: "#fff",
+                color: "#444",
+                transition: "background 0.18s ease, transform 0.18s ease",
                 flexShrink: 0,
               }}
             >
@@ -649,7 +610,7 @@ export default function Page() {
               flex: 1,
               overflowY: "auto",
               padding: "18px",
-              background: "#f7f7f7",
+              background: "#fafafa",
               display: "flex",
               flexDirection: "column",
               gap: "14px",
@@ -668,15 +629,15 @@ export default function Page() {
                 >
                   <div
                     style={{
-                      maxWidth: "80%",
+                      maxWidth: "78%",
                       padding: "14px 16px",
                       borderRadius: isUser
                         ? "18px 18px 6px 18px"
                         : "18px 18px 18px 6px",
-                      background: isUser ? "#f0d10b" : "#e8e8e8",
+                      background: isUser ? "#d9e9ff" : "#ececec",
                       color: "#111",
-                      fontSize: "16px",
-                      lineHeight: 1.5,
+                      fontSize: "17px",
+                      lineHeight: 1.45,
                       wordBreak: "break-word",
                     }}
                   >
@@ -702,14 +663,14 @@ export default function Page() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about services, hours..."
+              placeholder="Ask something..."
               style={{
                 flex: 1,
                 height: "52px",
                 borderRadius: "16px",
                 border: "1px solid #d8d8d8",
                 padding: "0 16px",
-                fontSize: "16px",
+                fontSize: "17px",
                 outline: "none",
                 background: "#fff",
               }}
@@ -722,7 +683,7 @@ export default function Page() {
                 height: "52px",
                 borderRadius: "16px",
                 border: "none",
-                background: "#111",
+                background: "#000",
                 color: "#fff",
                 fontSize: "18px",
                 fontWeight: 700,
